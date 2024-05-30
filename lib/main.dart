@@ -128,18 +128,17 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
         ),
         backgroundColor: Colors.blue,
       ),
+
       body: Column(
         children: <Widget>[
           SizedBox(height: 30,),
           Row(
             children: [
-              
               Expanded(
                 child: TextField(
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(2)),
-                   
-                    labelText: 'Qual a sua tarefa',
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                    labelText: 'Qual a sua tarefa?',
                   ),
                   onChanged: (text) {
                     setState(() {
@@ -149,15 +148,20 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
                 ),
               ),
               SizedBox(width: 10),
+
               ElevatedButton(
                 onPressed: _showAddTaskDialog,
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.zero,
+                    borderRadius: BorderRadius.circular(8),
                   ),
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 25),
                 ),
-                child: Text('Nova'),
+                child: Text('Criar',
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 116, 116, 116)
+                  ),
+                ),
               ),
             ],
           ),
@@ -167,17 +171,17 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
               children: [
                 _buildStatusSection('A Fazer', _toDoActivities),
                 _buildStatusSection('Em Andamento', _inProgressActivities),
-                _buildStatusSection('Feito', _doneActivities),
+                _buildStatusSection('Concluídas', _doneActivities),
               ],
             ),
           ),
         ],
       ),
+
       floatingActionButton: FloatingActionButton(
         onPressed: _navigateToArchivedScreen,
-        child: Icon(Icons.archive),
+        child: Icon(Icons.archive, color: Colors.blue, size: 28,),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
     );
   }
 
@@ -221,11 +225,19 @@ class ArchivedScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Atividades Arquivadas'),
+        titleTextStyle: TextStyle(
+          color: Colors.white, fontSize: 24
+        ),
+        foregroundColor: Colors.white,
         backgroundColor: Colors.blue,
       ),
       body: archivedActivities.isEmpty
        ? Center(
-            child: Text('Nenhuma atividade arquivada'),
+            child: Text('Nenhuma atividade arquivada',
+              style: TextStyle(
+                fontSize: 16
+              ),
+            ),
           )
         : ListView.builder(
             itemCount: archivedActivities.length,
