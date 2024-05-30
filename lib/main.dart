@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
-
 void main() {
   runApp(MyApp());
 }
-
 
 class MyApp extends StatelessWidget {
   @override
@@ -12,16 +10,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'To Do List',
       home: ChecklistScreen(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
-
 
 class ChecklistScreen extends StatefulWidget {
   @override
   _ChecklistScreenState createState() => _ChecklistScreenState();
 }
-
 
 class _ChecklistScreenState extends State<ChecklistScreen> {
   List<Activity> _toDoActivities = [];
@@ -29,7 +26,6 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
   List<Activity> _doneActivities = [];
   String _newActivityTitle = '';
   ActivityStatus? _selectedStatus;
-
 
   void _showAddTaskDialog() {
     showDialog(
@@ -41,7 +37,6 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
-               
                 onChanged: (text) {
                   setState(() {
                     _newActivityTitle = text;
@@ -113,7 +108,6 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
     );
   }
 
-
   void _navigateToArchivedScreen() {
     Navigator.push(
       context,
@@ -123,18 +117,23 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('To Do List'),
+        title: Text('To Do List',
+          style: TextStyle(
+            fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white
+          ),
+        ),
         backgroundColor: Colors.blue,
       ),
       body: Column(
         children: <Widget>[
+          SizedBox(height: 30,),
           Row(
             children: [
+              
               Expanded(
                 child: TextField(
                   decoration: InputDecoration(
@@ -182,7 +181,6 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
     );
   }
 
-
   Widget _buildStatusSection(String title, List<Activity> activities) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -213,13 +211,10 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
   }
 }
 
-
 class ArchivedScreen extends StatelessWidget {
   final List<Activity> archivedActivities;
 
-
   ArchivedScreen(this.archivedActivities);
-
 
   @override
   Widget build(BuildContext context) {
@@ -244,9 +239,7 @@ class ArchivedScreen extends StatelessWidget {
   }
 }
 
-
 enum ActivityStatus { toDo, inProgress, done }
-
 
 class Activity {
   String title;
