@@ -57,7 +57,7 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
                     value: ActivityStatus.inProgress,
                   ),
                   DropdownMenuItem<ActivityStatus>(
-                    child: Text('Feito'),
+                    child: Text('Concluída'),
                     value: ActivityStatus.done,
                   ),
                 ],
